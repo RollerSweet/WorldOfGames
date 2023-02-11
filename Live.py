@@ -1,6 +1,7 @@
 from GuessGame import play as GuessGamePlay
 from MemoryGame import play as MemoryGamePlay
 from CurrencyRouletteGame import play as CurrencyRouletteGamePlay
+from Score import add_score
 
 def welcome():
     while True:
@@ -10,7 +11,6 @@ def welcome():
         else:
             print("Invalid input, Please use only letters!.")
     return print(f"Hello {name} and welcome to the World of Games (WoG). Here you can find many cool games to play.")
-
 
 def load_game():
     # Print the game options
@@ -36,11 +36,14 @@ def load_game():
     print(f"Starting game {game} with difficulty {difficulty}\n")
 
     if game == '1':
-        print(GuessGamePlay(int(difficulty)))
+        if GuessGamePlay(int(difficulty)):
+            add_score(difficulty)
     elif game == '2':
-        print(MemoryGamePlay(int(difficulty)))
+        if MemoryGamePlay(int(difficulty)):
+            add_score(difficulty)
     elif game == '3':
-        CurrencyRouletteGamePlay(int(difficulty))
+        if CurrencyRouletteGamePlay(int(difficulty)):
+            add_score(difficulty)
 
     answer = input('\nDo you want to play another Game?\nType Yes or No: ')
     if answer.lower() == 'yes':
