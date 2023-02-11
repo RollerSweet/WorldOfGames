@@ -14,11 +14,13 @@ def get_guess_from_user(difficulty):
 
 def compare_results(user_guess, secret_number):
     if user_guess == secret_number:
-        return "You Won!"
+        print("You Won!")
+        return True
     else:
-        return "You Lost!"
+        print("You Lost!")
+        return False
 
 def play(difficulty):
     secret_number = generate_number(difficulty)
-    user_guess = get_guess_from_user(difficulty)
+    user_guess = int(get_guess_from_user(difficulty))
     return compare_results(user_guess, secret_number)

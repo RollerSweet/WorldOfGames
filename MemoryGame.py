@@ -1,13 +1,13 @@
 import random
 import time
 import re
-import os
+from Utils import Screen_cleaner
 
 def generate_sequence(difficulty):
     sequence = random.sample(range(1, 101), difficulty)
     print("Memorize the following numbers:", sequence)
     time.sleep(0.7)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    Screen_cleaner()
     return sequence
 
 def get_list_from_user(difficulty):
@@ -24,11 +24,14 @@ def get_list_from_user(difficulty):
 
 def is_list_equal(list1, list2):
     if len(list1) != len(list2):
-        return "You Lost!"
+        print("You Lost!")
+        return False
     for i in range(len(list1)):
         if list1[i] != list2[i]:
-            return "You Lost!"
-    return "You Won!"
+            print("You Lost!")
+            return False
+    print("You Won!")
+    return True
 
 def play(difficulty):
     sequence = generate_sequence(difficulty)
