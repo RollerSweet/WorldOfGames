@@ -9,16 +9,16 @@ async def score_server():
     try:
         with open(Utils.SCORES_FILE_NAME, "r") as score_file:
             score = score_file.read().strip()
-            h1 = f'The score is <div id="score">{score}</div>'
+            h1 = f'<h1>The score is <div id="score">{score}</div></h1>'
             if score == '':
-                h1 = 'The file is empty!'
+                h1 = '<h1>The file is empty!</h1>'
             return HTMLResponse(f"""
             <html>
                 <head>
                     <title>Scores Game</title>
                 </head>
                 <body>
-                    <h1>{h1}</h1>
+                    {h1}
                 </body>
             </html>""")
     except Exception as e:
