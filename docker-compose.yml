@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-fastapi-app
+    container_name: my-fastapi-container
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+    command: uvicorn MainScores:app --host 0.0.0.0 --port 80
+
+  push:
+    image: docker
+    container_name: my-docker-push
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      DOCKER_USERNAME: ${DOCKER_USERNAME}
+      DOCKER_TOKEN: ${DOCKER_TOKEN}
+    command: >
+      sh -c 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_TOKEN};
+      docker tag my-fastapi-app ${DOCKER_USERNAME}/my-fastapi-app;
+      docker push ${DOCKER_USERNAME}/my-fastapi-app'
