@@ -5,10 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: my-fastapi-app
-    container_name: my-fastapi-container
+    image: wog-app
+    container_name: my-wog-container
     ports:
-      - "80:80"
+      - "8777:80"
     volumes:
       - .:/app
     command: uvicorn MainScores:app --host 0.0.0.0 --port 80
@@ -23,5 +23,5 @@ services:
       DOCKER_TOKEN: ${DOCKER_TOKEN}
     command: >
       sh -c 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_TOKEN};
-      docker tag my-fastapi-app ${DOCKER_USERNAME}/my-fastapi-app;
-      docker push ${DOCKER_USERNAME}/my-fastapi-app'
+      docker tag wog-app ${DOCKER_USERNAME}/wog-app;
+      docker push ${DOCKER_USERNAME}/wog-app'
