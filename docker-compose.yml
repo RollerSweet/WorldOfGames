@@ -1,27 +1,14 @@
-version: "3"
+version: "3.8"
 
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    image: wog-app
+    image: rollersweet/wog-app
     container_name: my-wog-container
     ports:
       - "8777:80"
     volumes:
       - .:/app
     command: uvicorn MainScores:app --host 0.0.0.0 --port 80
-
-  push:
-    image: docker
-    container_name: my-docker-push
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      DOCKER_USERNAME: ${DOCKER_USERNAME}
-      DOCKER_TOKEN: ${DOCKER_TOKEN}
-    command: >
-      sh -c 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_TOKEN};
-      docker tag wog-app ${DOCKER_USERNAME}/wog-app;
-      docker push ${DOCKER_USERNAME}/wog-app'
