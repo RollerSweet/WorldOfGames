@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Copy the Scores.txt file into the container
-COPY Scores.txt /Scores.txt
+COPY Scores.txt /app/Scores.txt
 
 # Set the command to run the FastAPI project
 CMD ["uvicorn", "MainScores:app", "--host", "0.0.0.0", "--port", "80"]
