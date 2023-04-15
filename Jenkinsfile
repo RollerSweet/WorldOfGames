@@ -1,31 +1,31 @@
 pipeline {
-    agent any # Use any available agent to run the pipeline
+    agent any // Use any available agent to run the pipeline
 
-    stages { # Define the stages in the pipeline
-        stage('Build') { # First stage: Build
+    stages { // Define the stages in the pipeline
+        stage('Build') { // First stage: Build
             steps {
-                sh 'docker-compose build' # Build the Docker images defined in the docker-compose.yml file
+                sh 'docker-compose build' // Build the Docker images defined in the docker-compose.yml file
             }
         }
 
-        stage('Run') { # Second stage: Run
+        stage('Run') { // Second stage: Run
             steps {
-                sh 'docker-compose up -d' # Start the containers in detached mode (-d)
+                sh 'docker-compose up -d' // Start the containers in detached mode (-d)
             }
         }
 
-        stage('Test') { # Third stage: Test
+        stage('Test') { // Third stage: Test
             steps {
-                dir('tests') { # Change to the 'tests' directory
-                    sh 'python3 e2e.py' # Run an end-to-end test using Python
+                dir('tests') { // Change to the 'tests' directory
+                    sh 'python3 e2e.py' // Run an end-to-end test using Python
                 }
             }
         }
 
-        stage('Finalize') { # Fourth stage: Finalize
+        stage('Finalize') { // Fourth stage: Finalize
             steps {
-                sh 'docker-compose down' # Stop and remove the containers
-                sh 'docker-compose push' # Push the built images to a Docker registry
+                sh 'docker-compose down' // Stop and remove the containers
+                sh 'docker-compose push' // Push the built images to a Docker registry
             }
         }
     }
