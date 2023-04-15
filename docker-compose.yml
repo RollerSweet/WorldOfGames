@@ -5,8 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: rollersweet/wog_scores_fastapi
-    container_name: wog_scores_fastapi_container
+    image: wog-app
+    container_name: my-wog-container
     ports:
       - "8777:80"
     volumes:
@@ -23,5 +23,5 @@ services:
       DOCKER_TOKEN: ${DOCKER_TOKEN}
     command: >
       sh -c 'docker login -u ${DOCKER_USERNAME} -p ${DOCKER_TOKEN};
-      docker tag my-fastapi-app ${DOCKER_USERNAME}/my-fastapi-app;
-      docker push ${DOCKER_USERNAME}/my-fastapi-app'
+      docker tag wog-app ${DOCKER_USERNAME}/wog-app;
+      docker push ${DOCKER_USERNAME}/wog-app'
