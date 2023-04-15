@@ -5,10 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: my-fastapi-app
-    container_name: my-fastapi-container
+    image: rollersweet/wog_scores_fastapi
+    container_name: wog_scores_fastapi_container
     ports:
-      - "80:80"
+      - "8777:80"
     volumes:
       - .:/app
     command: uvicorn MainScores:app --host 0.0.0.0 --port 80
